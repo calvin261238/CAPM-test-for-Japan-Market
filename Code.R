@@ -20,7 +20,7 @@ Alphas <- rep(0,10)
 t_values <- rep(0,10)
 Average <- rep(0,10)
 
-#Excess Return of market and stock 1
+#Excess Return of market and stock 
 Rm <- capm[,2] - capm[,1]
 Ri <- capm[,3] - capm[,1]
 
@@ -34,7 +34,7 @@ Alphas[1] <- mycoef[1,1]
 t_values[1] <- mycoef[1,3]
 Average[1] <- mean(Ri)
 
-#Create a loop
+#Create a loop function
 for(i in 1:I){
   Ri <- capm[,2+i] - capm[,1]
   myResult <- lm(Ri~Rm)
@@ -46,7 +46,7 @@ for(i in 1:I){
   Average[i] <- mean(Ri)
 }
 
-#Visualize
+#Visualize with plot function
 plot(Betas, Average)
 x <- c(1:250)/100
 points(x, mean(Rm)*x, col="red", type="l")
@@ -66,7 +66,7 @@ y <- data[myOrder, ]
 Beta.high <- y[1:3, ]
 Beta.low <- y[I:(I-2),]
 
-#Visualizing
+#Now enhancing using ggplot2 packageVisualizing
 df <- data.frame(x=Betas, y=Average, z= companies2) # creating new data frame
 
 ggplot(df, aes(x=x,y=y,label=z))+
